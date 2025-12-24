@@ -1,11 +1,14 @@
 from board import Board
-from player import HumanPlayer, BotPlayer
+from player import HumanPlayer, BotPlayer, DifficultBotPlayer
 
 class Game:
-    def __init__(self, vs_bot=False):
+    def __init__(self, vs_bot=False, difficult=False):
         self.board = Board()
         self.player_x = HumanPlayer("X")
-        self.player_o = BotPlayer("O") if vs_bot else HumanPlayer("O")
+        if vs_bot:
+            self.player_o = DifficultBotPlayer("O") if difficult else BotPlayer("O")
+        else:
+            self.player_o = HumanPlayer("O")
 
     def play(self):
         current = self.player_x
